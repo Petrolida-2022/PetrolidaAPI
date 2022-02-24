@@ -41,4 +41,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function ord_competition()
+    {
+        return $this->hasOne(OrdCompetition::class);
+    }
+
+    public function ord_member()
+    {
+        return $this->hasMany(OrdMember::class);
+    }
 }
