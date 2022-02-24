@@ -10,7 +10,7 @@ class OrdCompetition extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'register_code', 'leader_name', 'leader_email', 'team_name', 'university', 'phone', 'leader_file'
+        'user_id', 'register_code', 'name', 'email', 'team_name', 'university', 'phone', 'file'
     ];
 
     public function user()

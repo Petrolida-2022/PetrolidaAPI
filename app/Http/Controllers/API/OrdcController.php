@@ -54,15 +54,14 @@ class OrdcController extends Controller
             'member3_name'  => 'required|max:255',
             'member3_email' => 'required|email:dns|max:255|unique:ord_members,email',
             'member3_phone' => 'required|min:10|max:14|unique:ord_members,phone',
-            'member4_name'  => 'max:255',
-            'member4_email' => 'email:dns|max:255|unique:ord_members,email',
-            'member4_phone' => 'min:10|max:14|unique:ord_members,phone',
-
+            'member4_name'  => 'nullable|amax:255',
+            'member4_email' => 'nullable|email:dns|max:255|unique:ord_members,email',
+            'member4_phone' => 'nullable|min:10|max:14|unique:ord_members,phone',
             'leader_file'   => 'required|max:2048|mimes:pdf,jpg,jpeg,png',
             'member1_file'  => 'required|max:2048|mimes:pdf,jpg,jpeg,png',
             'member2_file'  => 'required|max:2048|mimes:pdf,jpg,jpeg,png',
             'member3_file'  => 'required|max:2048|mimes:pdf,jpg,jpeg,png',
-            'member4_file'  => 'max:2048|mimes:pdf,jpg,jpeg,png',
+            'member4_file'  => 'nullable|max:2048|mimes:pdf,jpg,jpeg,png',
         ]);
 
         // Validator Failed
@@ -73,8 +72,9 @@ class OrdcController extends Controller
         $validated = $validator->validated();
 
         // Generate Register Code
-        $register_code = 'ORDC-' . (OrdCompetition::count() ?? 0) + 1;
-
+        // return response()->json(!isset($validated["member3_name"]));
+        $register_code = 'ORDC-' . (OrdCompetition::count()+ 1) ;
+        // $register_code =1;
         // Modify Phone Number
         $firstNumber = substr($validated['phone'], 0, 1);
         if ($firstNumber === '0') {
@@ -102,7 +102,7 @@ class OrdcController extends Controller
         // Store Members Data
         for ($i = 1; $i <= 4; $i++) {
             // Check if empty
-            if ($validated["member${i}_name"] && $validated["member${i}_email"] && $validated["member${i}_phone"]) {
+            if (isset($validated["member${i}_name"]) && isset($validated["member${i}_email"]) && isset($validated["member${i}_phone"])) {
                 // Modify Member File Name and Store Member File
                 $member_file = $register_code . "_Member$i." . $validated["member${i}_file"]->extension();
                 $validated["member${i}_file"]->move(public_path('files/ordc'), $member_file);
