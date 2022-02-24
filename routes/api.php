@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\OrdcController;
 use App\Http\Controllers\API\showController;
 use App\Http\Controllers\API\PetrosmartformsController;
 
@@ -33,7 +34,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         return auth()->user()->name;
     });
 
-    Route::post('/oilrigdesignregistration', [App\Http\Controllers\API\OilrigformsController::class,'store']);
+    Route::post('/oilrigdesignregistration', [App\Http\Controllers\API\OrdcController::class,'store']);
     Route::post('/fracturingfluiddesignregistration', [App\Http\Controllers\API\FracturingfluidformsController::class,'store']);
     Route::post('/stocktradingregistration', [App\Http\Controllers\API\StocktradingformsController::class,'store']);
     Route::post('/petrosmartregistration', [App\Http\Controllers\API\PetrosmartformsController::class,'store']);

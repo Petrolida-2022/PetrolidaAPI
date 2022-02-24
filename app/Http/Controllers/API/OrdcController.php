@@ -45,7 +45,6 @@ class OrdcController extends Controller
             'team_name'     => 'required|max:255',
             'university'    => 'required|max:255',
             'phone'         => 'required|min:10|max:14|unique:ord_competitions,phone',
-
             'member1_name'  => 'required|max:255',
             'member1_email' => 'required|email:dns|max:255|unique:ord_members,member_email',
             'member1_phone' => 'required|min:10|max:14|unique:ord_members,member_email',
@@ -58,7 +57,6 @@ class OrdcController extends Controller
             'member4_name'  => 'max:255',
             'member4_email' => 'email:dns|max:255|unique:ord_members,member_email',
             'member4_phone' => 'min:10|max:14|unique:ord_members,member_email',
-
             'leader_file'   => 'required|max:2048|mimes:pdf,jpg,jpeg,png',
             'member1_file'  => 'required|max:2048|mimes:pdf,jpg,jpeg,png',
             'member2_file'  => 'required|max:2048|mimes:pdf,jpg,jpeg,png',
