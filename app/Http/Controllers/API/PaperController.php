@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\OrdCompetition;
-use App\Models\OrdMember;
+use App\Models\PaperCompetition;
+use App\Models\PaperMember;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class OrdcController extends Controller
+class PaperController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -46,24 +46,16 @@ class OrdcController extends Controller
             'university'    => 'required|max:255',
             'phone'         => 'required|min:10|max:14|unique:ord_competitions,phone',
 
-            'member1_name'  => 'required|max:255',
-            'member1_email' => 'required|email:dns|max:255|unique:ord_members,email',
-            'member1_phone' => 'required|min:10|max:14|unique:ord_members,phone',
-            'member2_name'  => 'required|max:255',
-            'member2_email' => 'required|email:dns|max:255|unique:ord_members,email',
-            'member2_phone' => 'required|min:10|max:14|unique:ord_members,phone',
-            'member3_name'  => 'required|max:255',
-            'member3_email' => 'required|email:dns|max:255|unique:ord_members,email',
-            'member3_phone' => 'required|min:10|max:14|unique:ord_members,phone',
-            'member4_name'  => 'nullable|max:255',
-            'member4_email' => 'nullable|email:dns|max:255|unique:ord_members,email',
-            'member4_phone' => 'nullable|min:10|max:14|unique:ord_members,phone',
+            'member1_name'  => 'nullable|max:255',
+            'member1_email' => 'nullable|email:dns|max:255|unique:ord_members,email',
+            'member1_phone' => 'nullable|min:10|max:14|unique:ord_members,phone',
+            'member2_name'  => 'nullable|max:255',
+            'member2_email' => 'nullable|email:dns|max:255|unique:ord_members,email',
+            'member2_phone' => 'nullable|min:10|max:14|unique:ord_members,phone',
 
             'leader_file'   => 'required|max:2048|mimes:pdf,jpg,jpeg,png',
-            'member1_file'  => 'required|max:2048|mimes:pdf,jpg,jpeg,png',
-            'member2_file'  => 'required|max:2048|mimes:pdf,jpg,jpeg,png',
-            'member3_file'  => 'required|max:2048|mimes:pdf,jpg,jpeg,png',
-            'member4_file'  => 'nullable|max:2048|mimes:pdf,jpg,jpeg,png',
+            'member1_file'  => 'nullable|max:2048|mimes:pdf,jpg,jpeg,png',
+            'member2_file'  => 'nullable|max:2048|mimes:pdf,jpg,jpeg,png',
         ]);
 
         // Validator Failed
@@ -74,14 +66,14 @@ class OrdcController extends Controller
         $validated = $validator->validated();
 
         // Generate Register Code
-        $register_code = 'ORDC-' . (OrdCompetition::count() + 1);
+        $register_code = 'PAPER-' . (PaperCompetition::count() + 1);
 
         // Modify Leader File Name and Store Leader File
         $leader_file = $register_code . '_Leader.' . $request->leader_file->extension();
-        $request->leader_file->move(public_path('files/ordc'), $leader_file);
+        $request->leader_file->move(public_path('files/paper'), $leader_file);
 
         // Store Leader Data and get Data ID
-        $register_id = OrdCompetition::create([
+        $register_id = PaperCompetition::create([
             'user_id'       => auth()->user()->id,
             'register_code' => $register_code,
             'name'          => $validated["leader_name"],
@@ -93,17 +85,17 @@ class OrdcController extends Controller
         ])->id;
 
         // Store Members Data
-        for ($i = 1; $i <= 4; $i++) {
+        for ($i = 1; $i <= 2; $i++) {
             // Check if empty
             if (isset($validated["member${i}_name"]) && isset($validated["member${i}_email"]) && isset($validated["member${i}_phone"])) {
                 // Modify Member File Name and Store Member File
                 $member_file = $register_code . "_Member$i." . $validated["member${i}_file"]->extension();
-                $validated["member${i}_file"]->move(public_path('files/ordc'), $member_file);
+                $validated["member${i}_file"]->move(public_path('files/paper'), $member_file);
 
                 // Store Member Data
-                OrdMember::create([
+                PaperMember::create([
                     'user_id'               => auth()->user()->id,
-                    'ord_competition_id'    => $register_id,
+                    'paper_competition_id'    => $register_id,
                     'register_code'         => $register_code,
                     'name'                  => $validated["member${i}_name"],
                     'email'                 => $validated["member${i}_email"],
@@ -119,10 +111,10 @@ class OrdcController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\OrdCompetition  $ordCompetition
+     * @param  \App\Models\PaperCompetition  $paperCompetition
      * @return \Illuminate\Http\Response
      */
-    public function show(OrdCompetition $ordCompetition)
+    public function show(PaperCompetition $paperCompetition)
     {
         //
     }
@@ -130,10 +122,10 @@ class OrdcController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\OrdCompetition  $ordCompetition
+     * @param  \App\Models\PaperCompetition  $paperCompetition
      * @return \Illuminate\Http\Response
      */
-    public function edit(OrdCompetition $ordCompetition)
+    public function edit(PaperCompetition $paperCompetition)
     {
         //
     }
@@ -142,10 +134,10 @@ class OrdcController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\OrdCompetition  $ordCompetition
+     * @param  \App\Models\PaperCompetition  $paperCompetition
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OrdCompetition $ordCompetition)
+    public function update(Request $request, PaperCompetition $paperCompetition)
     {
         //
     }
@@ -153,10 +145,10 @@ class OrdcController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\OrdCompetition  $ordCompetition
+     * @param  \App\Models\PaperCompetition  $paperCompetition
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OrdCompetition $ordCompetition)
+    public function destroy(PaperCompetition $paperCompetition)
     {
         //
     }

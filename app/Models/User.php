@@ -42,6 +42,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    // ORDC Relations
     public function ord_competition()
     {
         return $this->hasOne(OrdCompetition::class);
@@ -50,5 +51,27 @@ class User extends Authenticatable
     public function ord_member()
     {
         return $this->hasMany(OrdMember::class);
+    }
+
+    // PAPER Relations
+    public function paper_competition()
+    {
+        return $this->hasOne(PaperCompetition::class);
+    }
+
+    public function paper_member()
+    {
+        return $this->hasMany(PaperMember::class);
+    }
+
+    // Stock Trading Relations
+    public function stock_competition()
+    {
+        return $this->hasOne(StockCompetition::class);
+    }
+
+    public function stock_member()
+    {
+        return $this->hasOne(StockMember::class);
     }
 }
