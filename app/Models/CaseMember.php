@@ -21,4 +21,5 @@ class CaseMember extends Model
     public function case_competition()
     {
         return $this->belongsTo(CaseCompetition::class);
+    }
 }
