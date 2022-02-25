@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\PaperCompetition;
-use App\Models\PaperMember;
+use App\Models\FfdCompetition;
+use App\Models\FfdMember;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class PaperController extends Controller
+class FfdController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,21 +41,21 @@ class PaperController extends Controller
         // Validator
         $validator = Validator::make($request->all(), [
             'leader_name'   => 'required|max:255',
-            'leader_email'  => 'required|email:dns|max:255|unique:paper_competitions,email',
+            'leader_email'  => 'required|email:dns|max:255|unique:ffd_competitions,email',
             'team_name'     => 'required|max:255',
             'university'    => 'required|max:255',
-            'phone'         => 'required|min:10|max:14|unique:paper_competitions,phone',
+            'phone'         => 'required|min:10|max:14|unique:ffd_competitions,phone',
 
-            'member1_name'  => 'nullable|max:255',
-            'member1_email' => 'nullable|email:dns|max:255|unique:paper_members,email',
-            'member1_phone' => 'nullable|min:10|max:14|unique:paper_members,phone',
-            'member2_name'  => 'nullable|max:255',
-            'member2_email' => 'nullable|email:dns|max:255|unique:paper_members,email',
-            'member2_phone' => 'nullable|min:10|max:14|unique:paper_members,phone',
+            'member1_name'  => 'required|max:255',
+            'member1_email' => 'required|email:dns|max:255|unique:ffd_members,email',
+            'member1_phone' => 'required|min:10|max:14|unique:ffd_members,phone',
+            'member2_name'  => 'required|max:255',
+            'member2_email' => 'required|email:dns|max:255|unique:ffd_members,email',
+            'member2_phone' => 'required|min:10|max:14|unique:ffd_members,phone',
 
             'leader_file'   => 'required|max:2048|mimes:pdf,jpg,jpeg,png',
-            'member1_file'  => 'nullable|max:2048|mimes:pdf,jpg,jpeg,png',
-            'member2_file'  => 'nullable|max:2048|mimes:pdf,jpg,jpeg,png',
+            'member1_file'  => 'required|max:2048|mimes:pdf,jpg,jpeg,png',
+            'member2_file'  => 'required|max:2048|mimes:pdf,jpg,jpeg,png',
         ]);
 
         // Validator Failed
@@ -66,14 +66,14 @@ class PaperController extends Controller
         $validated = $validator->validated();
 
         // Generate Register Code
-        $register_code = 'PAPER-' . (PaperCompetition::count() + 1);
+        $register_code = 'FFDC-' . (FfdCompetition::count() + 1);
 
         // Modify Leader File Name and Store Leader File
         $leader_file = $register_code . '_Leader.' . $request->leader_file->extension();
-        $request->leader_file->move(public_path('files/paper'), $leader_file);
+        $request->leader_file->move(public_path('files/ffdc'), $leader_file);
 
         // Store Leader Data and get Data ID
-        $register_id = PaperCompetition::create([
+        $register_id = FfdCompetition::create([
             'user_id'       => auth()->user()->id,
             'register_code' => $register_code,
             'name'          => $validated["leader_name"],
@@ -90,12 +90,12 @@ class PaperController extends Controller
             if (isset($validated["member${i}_name"]) && isset($validated["member${i}_email"]) && isset($validated["member${i}_phone"])) {
                 // Modify Member File Name and Store Member File
                 $member_file = $register_code . "_Member$i." . $validated["member${i}_file"]->extension();
-                $validated["member${i}_file"]->move(public_path('files/paper'), $member_file);
+                $validated["member${i}_file"]->move(public_path('files/ffdc'), $member_file);
 
                 // Store Member Data
-                PaperMember::create([
+                FfdMember::create([
                     'user_id'               => auth()->user()->id,
-                    'paper_competition_id'    => $register_id,
+                    'ffd_competition_id'    => $register_id,
                     'register_code'         => $register_code,
                     'name'                  => $validated["member${i}_name"],
                     'email'                 => $validated["member${i}_email"],
@@ -111,10 +111,10 @@ class PaperController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\PaperCompetition  $paperCompetition
+     * @param  \App\Models\FfdCompetition  $ffdCompetition
      * @return \Illuminate\Http\Response
      */
-    public function show(PaperCompetition $paperCompetition)
+    public function show(FfdCompetition $ffdCompetition)
     {
         //
     }
@@ -122,10 +122,10 @@ class PaperController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\PaperCompetition  $paperCompetition
+     * @param  \App\Models\FfdCompetition  $ffdCompetition
      * @return \Illuminate\Http\Response
      */
-    public function edit(PaperCompetition $paperCompetition)
+    public function edit(FfdCompetition $ffdCompetition)
     {
         //
     }
@@ -134,10 +134,10 @@ class PaperController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\PaperCompetition  $paperCompetition
+     * @param  \App\Models\FfdCompetition  $ffdCompetition
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PaperCompetition $paperCompetition)
+    public function update(Request $request, FfdCompetition $ffdCompetition)
     {
         //
     }
@@ -145,10 +145,10 @@ class PaperController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\PaperCompetition  $paperCompetition
+     * @param  \App\Models\FfdCompetition  $ffdCompetition
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PaperCompetition $paperCompetition)
+    public function destroy(FfdCompetition $ffdCompetition)
     {
         //
     }

@@ -41,14 +41,14 @@ class StockController extends Controller
         // Validator
         $validator = Validator::make($request->all(), [
             'leader_name'   => 'required|max:255',
-            'leader_email'  => 'required|email:dns|max:255|unique:ord_competitions,email',
+            'leader_email'  => 'required|email:dns|max:255|unique:stock_competitions,email',
             'team_name'     => 'required|max:255',
             'university'    => 'required|max:255',
-            'phone'         => 'required|min:10|max:14|unique:ord_competitions,phone',
+            'phone'         => 'required|min:10|max:14|unique:stock_competitions,phone',
 
             'member_name'   => 'required|max:255',
-            'member_email'  => 'required|email:dns|max:255|unique:ord_members,email',
-            'member_phone'  => 'required|min:10|max:14|unique:ord_members,phone',
+            'member_email'  => 'required|email:dns|max:255|unique:stock_members,email',
+            'member_phone'  => 'required|min:10|max:14|unique:stock_members,phone',
 
             'leader_file'   => 'required|max:2048|mimes:pdf,jpg,jpeg,png',
             'member_file'   => 'required|max:2048|mimes:pdf,jpg,jpeg,png',

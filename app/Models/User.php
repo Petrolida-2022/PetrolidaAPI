@@ -74,4 +74,48 @@ class User extends Authenticatable
     {
         return $this->hasOne(StockMember::class);
     }
+
+    // Business Case Relations
+    public function business_competition()
+    {
+        return $this->hasOne(BusinessCompetition::class);
+    }
+
+    public function business_member()
+    {
+        return $this->hasOne(BusinessMember::class);
+    }
+
+    // Case Study Relations
+    public function case_competition()
+    {
+        return $this->hasOne(CaseCompetition::class);
+    }
+
+    public function case_member()
+    {
+        return $this->hasOne(CaseMember::class);
+    }
+
+    // FFDC Relations
+    public function ffd_competition()
+    {
+        return $this->hasOne(FfdCompetition::class);
+    }
+
+    public function ffd_member()
+    {
+        return $this->hasOne(FfdMember::class);
+    }
+
+    // Petrosmart Relations
+    public function petrosmart_competition()
+    {
+        return $this->hasOne(PetrosmartCompetition::class);
+    }
+
+    public function petrosmart_member()
+    {
+        return $this->hasOne(PetrosmartMember::class);
+    }
 }
