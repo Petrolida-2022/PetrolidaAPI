@@ -16,7 +16,7 @@ use App\Http\Controllers\API\showController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware(['auth:sanctum', 'cors'])->get('/user', function (Request $request) {
     return $request->user();
 });
 
@@ -26,7 +26,7 @@ Route::post('/register', [App\Http\Controllers\API\AuthController::class, 'regis
 Route::post('/login', [App\Http\Controllers\API\AuthController::class, 'login']);
 
 //Protecting Routes
-Route::group(['middleware' => ['auth:sanctum']], function () {
+Route::group(['middleware' => ['auth:sanctum', 'cors']], function () {
     Route::get('/profile', function (Request $request) {
         return auth()->user()->name;
     });
