@@ -10,7 +10,7 @@ class PetrosmartCompetition extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'petrosmart_competition_id', 'register_code', 'name', 'email', 'phone', 'file'
+        'user_id', 'register_code', 'name', 'email', 'team_name', 'university', 'phone', 'file'
     ];
 
     public function user()
@@ -18,8 +18,8 @@ class PetrosmartCompetition extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function petrosmart_competition()
+    public function petrosmart_member()
     {
-        return $this->belongsTo(PetrosmartCompetition::class);
+        return $this->hasMany(PetrosmartMember::class);
     }
 }
