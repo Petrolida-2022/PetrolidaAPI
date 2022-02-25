@@ -158,6 +158,39 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'name'          => 'name',
+        'email'         => 'email',
+        'password'      => 'password',
+
+        'leader_name'   => 'leader name',
+        'leader_email'  => 'leader email',
+        'team_name'     => 'team name',
+        'university'    => 'university',
+        'phone'         => 'phone number',
+
+        'member_name'   => 'member name',
+        'member_email'  => 'member email',
+        'member_phone'  => 'member phone number',
+        'member1_name'  => 'first member name',
+        'member1_email' => 'first member email',
+        'member1_phone' => 'first member phone number',
+        'member2_name'  => 'second member name',
+        'member2_email' => 'second member email',
+        'member2_phone' => 'second member phone number',
+        'member3_name'  => 'third member name',
+        'member3_email' => 'third member email',
+        'member3_phone' => 'third member phone number',
+        'member4_name'  => 'fourth member name',
+        'member4_email' => 'fourth member email',
+        'member4_phone' => 'fourth member phone number',
+
+        'leader_file'   => 'leader identity',
+        'member1_file'  => 'first member identity',
+        'member2_file'  => 'second member identity',
+        'member3_file'  => 'third member identity',
+        'member4_file'  => 'fourth member identity',
+        'payment'       => 'payment slip',
+    ],
 
 ];

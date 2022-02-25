@@ -10,7 +10,7 @@ class StockCompetition extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'register_code', 'name', 'email', 'team_name', 'university', 'phone', 'file'
+        'user_id', 'register_code', 'name', 'email', 'team_name', 'university', 'phone', 'file', 'payment'
     ];
 
     public function user()

@@ -52,6 +52,7 @@ class StockController extends Controller
 
             'leader_file'   => 'required|max:2048|mimes:pdf,jpg,jpeg,png',
             'member_file'   => 'required|max:2048|mimes:pdf,jpg,jpeg,png',
+            'payment'       => 'required|max:2048|mimes:pdf,jpg,jpeg,png',
         ]);
 
         // Validator Failed
@@ -68,6 +69,10 @@ class StockController extends Controller
         $leader_file = $register_code . '_Leader.' . $request->leader_file->extension();
         $request->leader_file->move(public_path('files/stc'), $leader_file);
 
+        // Modify Payment Slip and Store File
+        $payment_file = $register_code . '_payment.' . $request->payment->extension();
+        $request->payment->move(public_path('files/stc'), $payment_file);
+
         // Store Leader Data and get Data ID
         $register_id = StockCompetition::create([
             'user_id'       => auth()->user()->id,
@@ -78,6 +83,7 @@ class StockController extends Controller
             'university'    => $validated["university"],
             'phone'         => $validated["phone"],
             'file'          => $leader_file,
+            'payment'       => $payment_file
         ])->id;
 
         // Modify Member File Name and Store Member File

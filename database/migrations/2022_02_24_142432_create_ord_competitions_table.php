@@ -23,6 +23,7 @@ class CreateOrdCompetitionsTable extends Migration
             $table->string('university');
             $table->string('phone')->unique();
             $table->string('file');
+            $table->string('payment');
             $table->timestamps();
         });
     }
