@@ -53,10 +53,10 @@ class CaseController extends Controller
             'member2_email' => 'required|email:dns|max:255|unique:case_members,email',
             'member2_phone' => 'required|min:10|max:14|unique:case_members,phone',
 
-            'leader_file'   => 'required|max:2048|mimes:pdf,jpg,jpeg,png',
-            'member1_file'  => 'required|max:2048|mimes:pdf,jpg,jpeg,png',
-            'member2_file'  => 'required|max:2048|mimes:pdf,jpg,jpeg,png',
-            'payment'       => 'required|max:2048|mimes:pdf,jpg,jpeg,png',
+            'leader_file'   => 'required|max:2048|mimes:zip,rar',
+            'member1_file'  => 'required|max:2048|mimes:zip,rar',
+            'member2_file'  => 'required|max:2048|mimes:zip,rar',
+            'payment'       => 'required|max:2048|mimes:jpg,jpeg,png',
         ]);
 
         // Validator Failed

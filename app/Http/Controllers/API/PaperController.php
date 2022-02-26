@@ -53,10 +53,10 @@ class PaperController extends Controller
             'member2_email' => 'nullable|email:dns|max:255|unique:paper_members,email',
             'member2_phone' => 'nullable|min:10|max:14|unique:paper_members,phone',
 
-            'leader_file'   => 'required|max:2048|mimes:pdf,jpg,jpeg,png',
-            'member1_file'  => 'nullable|max:2048|mimes:pdf,jpg,jpeg,png',
-            'member2_file'  => 'nullable|max:2048|mimes:pdf,jpg,jpeg,png',
-            'payment'       => 'required|max:2048|mimes:pdf,jpg,jpeg,png',
+            'leader_file'   => 'required|max:2048|mimes:zip,rar',
+            'member1_file'  => 'nullable|max:2048|mimes:zip,rar',
+            'member2_file'  => 'nullable|max:2048|mimes:zip,rar',
+            'payment'       => 'required|max:2048|mimes:jpg,jpeg,png',
         ]);
 
         // Validator Failed

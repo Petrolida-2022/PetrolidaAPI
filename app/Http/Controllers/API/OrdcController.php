@@ -59,12 +59,12 @@ class OrdcController extends Controller
             'member4_email' => 'nullable|email:dns|max:255|unique:ord_members,email',
             'member4_phone' => 'nullable|min:10|max:14|unique:ord_members,phone',
 
-            'leader_file'   => 'required|max:2048|mimes:pdf,jpg,jpeg,png',
-            'member1_file'  => 'required|max:2048|mimes:pdf,jpg,jpeg,png',
-            'member2_file'  => 'required|max:2048|mimes:pdf,jpg,jpeg,png',
-            'member3_file'  => 'required|max:2048|mimes:pdf,jpg,jpeg,png',
-            'member4_file'  => 'nullable|max:2048|mimes:pdf,jpg,jpeg,png',
-            'payment'       => 'required|max:2048|mimes:pdf,jpg,jpeg,png',
+            'leader_file'   => 'required|max:2048|mimes:zip,rar',
+            'member1_file'  => 'required|max:2048|mimes:zip,rar',
+            'member2_file'  => 'required|max:2048|mimes:zip,rar',
+            'member3_file'  => 'required|max:2048|mimes:zip,rar',
+            'member4_file'  => 'nullable|max:2048|mimes:zip,rar',
+            'payment'       => 'required|max:2048|mimes:jpg,jpeg,png',
         ]);
 
         // Validator Failed

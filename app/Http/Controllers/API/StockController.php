@@ -50,9 +50,9 @@ class StockController extends Controller
             'member_email'  => 'required|email:dns|max:255|unique:stock_members,email',
             'member_phone'  => 'required|min:10|max:14|unique:stock_members,phone',
 
-            'leader_file'   => 'required|max:2048|mimes:pdf,jpg,jpeg,png',
-            'member_file'   => 'required|max:2048|mimes:pdf,jpg,jpeg,png',
-            'payment'       => 'required|max:2048|mimes:pdf,jpg,jpeg,png',
+            'leader_file'   => 'required|max:2048|mimes:zip,rar',
+            'member_file'   => 'required|max:2048|mimes:zip,rar',
+            'payment'       => 'required|max:2048|mimes:jpg,jpeg,png',
         ]);
 
         // Validator Failed
