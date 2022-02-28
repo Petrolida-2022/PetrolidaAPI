@@ -75,7 +75,7 @@ class CaseController extends Controller
 
         // Modify Payment Slip and Store File
         $payment_file = $register_code . '_payment.' . $request->payment->extension();
-        $request->payment->move(public_path('files/stc'), $payment_file);
+        $request->payment->move(public_path('files/sc'), $payment_file);
 
         // Store Leader Data and get Data ID
         $register_id = CaseCompetition::create([
